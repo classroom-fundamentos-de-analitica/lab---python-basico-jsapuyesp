@@ -11,6 +11,13 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+#Lectura y limpieza de datos
+with open("./data.csv", "r") as file:
+    datos = file.readlines()
+
+datoscsv = [line.replace("\n", "") for line in datos]
+
+datosFin = [line.split("\t") for line in datoscsv]
 
 
 def pregunta_01():
@@ -21,13 +28,16 @@ def pregunta_01():
     214
 
     """
-    return
+    suma = 0
+    for dato in datosFin:
+        suma += int(dato[1])
+    return suma
 
 
 def pregunta_02():
     """
-    Retorne la cantidad de registros por cada letra de la primera columna como la lista
-    de tuplas (letra, cantidad), ordendas alfabéticamente.
+        Retorne la cantidad de registros por cada letra de la primera columna como la lista
+        de tuplas (letra, cantidad), ordendas alfabéticamente.
 
     Rta/
     [
@@ -39,6 +49,12 @@ def pregunta_02():
     ]
 
     """
+    lista1 = []
+    lista2 = []
+    for dato in datosFin:
+        letra = dato[0]
+        if letra in lista1:
+
     return
 
 
