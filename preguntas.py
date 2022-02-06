@@ -54,8 +54,16 @@ def pregunta_02():
     for dato in datosFin:
         letra = dato[0]
         if letra in lista1:
+            value = lista1.index(letra)
+            lista2[value] += 1
+        else: 
+            lista1.append(letra)
+            lista2.append(1)
+    
+    lista = list(zip(lista1, lista2))
 
-    return
+    return sorted(lista, key = lambda x: x[0])
+
 
 
 def pregunta_03():
@@ -73,7 +81,20 @@ def pregunta_03():
     ]
 
     """
-    return
+    lista1 = []
+    lista2 = []
+    for dato in datosFin:
+        letra = dato[0]
+        if letra in lista1:
+            value = lista1.index(letra)
+            lista2[value] += int(dato[1])
+        else:
+            lista1.append(letra)
+            lista2.append(int(dato[1]))
+    
+    lista = list(zip(lista1,lista2))
+
+    return sorted(lista, key= lambda x: x[0])
 
 
 def pregunta_04():
@@ -98,7 +119,19 @@ def pregunta_04():
     ]
 
     """
-    return
+    lista1 = []
+    lista2= []
+    for dato in datosFin:
+        fecha = dato[2].split('-')
+        mes = fecha[1]
+        if mes in lista1:
+            val = lista1.index(mes)
+            lista2[val] += 1
+        else:
+            lista1.append(mes)
+            lista2.append(1)
+    lista = list(zip(lista1, lista2))
+    return sorted(lista, key=lambda x: x[0])
 
 
 def pregunta_05():
@@ -116,7 +149,25 @@ def pregunta_05():
     ]
 
     """
-    return
+    lista1 = []
+    lista2 = []
+    listaMax = []
+    listaMin = []
+
+    for dato in datosFin:
+        letra = dato[0]
+        if letra in lista1:
+            val = lista1.index(letra)
+            lista2[val].append(int(dato[1]))
+        else:
+            lista1.append(letra)
+            lista2.append([int(dato[1])])
+    for ele in lista2:
+        listaMax.append(max(ele))
+        listaMin.append(min(ele))
+
+    lista = list(zip(lista1, listaMax, listaMin))
+    return sorted(lista, key=lambda x: x[0])
 
 
 def pregunta_06():
@@ -141,7 +192,34 @@ def pregunta_06():
     ]
 
     """
-    return
+    lista1 = []
+    lista2 = []
+    listaMax = []
+    listaMin = []
+
+    for dato in datosFin:
+        res = []
+        for sub in dato[4].split(','):
+
+            if ':' in sub:
+                res.append(map(str.strip, sub.split(':', 1)))
+
+        res = dict(res)
+        for k in res.keys():
+            letra = k
+            if letra in lista1:
+                val = lista1.index(letra)
+                lista2[val].append(int(res[k]))
+            else:
+                lista1.append(letra)
+                lista2.append([int(res[k])])
+
+    for ele in lista2:
+        listaMax.append(max(ele))
+        listaMin.append(min(ele))
+
+    lista = list(zip(lista1, listaMin, listaMax))
+    return sorted(lista, key=lambda tup: tup[0])
 
 
 def pregunta_07():
@@ -165,7 +243,19 @@ def pregunta_07():
     ]
 
     """
-    return
+    lista1 = []
+    lista2 = []
+    for dato in datosFin:
+        num = int(dato[1])
+        if num in lista1:
+            val = lista1.index(num)
+            lista2[val].append(dato[0])
+        else:
+            lista1.append(num)
+            lista2.append([dato[0]])
+
+    lista = list(zip(lista1, lista2))
+    return sorted(lista, key=lambda tup: tup[0])
 
 
 def pregunta_08():
@@ -190,7 +280,23 @@ def pregunta_08():
     ]
 
     """
-    return
+    lista1 = []
+    lista2 = []
+    for dato in datosFin:
+        num = int(dato[1])
+        if num in lista1:
+            val = lista1.index(num)
+            if not dato[0] in lista2[val]:
+                lista2[val].append(dato[0])
+        else:
+            lista1.append(num)
+            lista2.append([dato[0]])
+
+    for l in lista2:
+        l = l.sort()
+
+    lista = list(zip(lista1, lista2))
+    return sorted(lista, key=lambda tup: tup[0])
 
 
 def pregunta_09():
@@ -213,7 +319,31 @@ def pregunta_09():
     }
 
     """
-    return
+    lista1 = []
+    lista2 = []
+    lista3 = []
+
+    for dato in datosFin:
+        res = []
+        for sub in dato[4].split(','):
+
+            if ':' in sub:
+                res.append(map(str.strip, sub.split(':', 1)))
+
+        res = dict(res)
+        for k in res.keys():
+            letra = k
+            if letra in lista1:
+                val = lista1.index(letra)
+                lista2[val].append(int(res[k]))
+            else:
+                lista1.append(letra)
+                lista2.append([int(res[k])])
+
+    for ele in lista2:
+        lista3.append(len(ele))
+    lista = dict(zip(lista1, lista3))
+    return lista
 
 
 def pregunta_10():
@@ -234,7 +364,29 @@ def pregunta_10():
 
 
     """
-    return
+    lista1 = []
+    lista2 = []
+    lista3 = []
+
+    for dato in datosFin:
+        res = []
+        lista1.append(dato[0])
+
+        lista = dato[3].split(',')
+
+        lista2.append(len(lista))
+
+        for sub in dato[4].split(','):
+
+            if ':' in sub:
+                res.append(map(str.strip, sub.split(':', 1)))
+
+        res = dict(res)
+
+        lista3.append(len(res))
+
+    lista = list(zip(lista1, lista2, lista3))
+    return lista
 
 
 def pregunta_11():
@@ -255,7 +407,16 @@ def pregunta_11():
 
 
     """
-    return
+    dic = {}
+
+    for dato in datosFin:
+        valor = int(dato[1])
+        for letra in dato[3].split(','):
+            if letra in dic:
+                dic[letra] += valor
+            else:
+                dic[letra] = valor
+    return dic
 
 
 def pregunta_12():
@@ -273,4 +434,23 @@ def pregunta_12():
     }
 
     """
-    return
+    dic = {}
+
+    for dato in datosFin:
+        res = []
+        letra = dato[0]
+
+        for sub in dato[4].split(','):
+
+            if ':' in sub:
+                res.append(map(str.strip, sub.split(':', 1)))
+
+        res = dict(res)
+        res = dict([a, int(x)] for a, x in res.items())
+        valor = sum(res.values())
+        if letra in dic:
+            dic[letra] += valor
+        else:
+            dic[letra] = valor
+
+    return dic
